@@ -1,0 +1,12 @@
+* text=auto
+
+# Gradle wrapper 脚本必须保持 LF，否则在 Linux/macOS 上无法执行
+gradlew text eol=lf
+*.sh text eol=lf
+*.bat text eol=crlf
+
+# 二进制文件不做换行转换
+*.jar binary
+*.png binary
+*.jpg binary
+*.webp binary

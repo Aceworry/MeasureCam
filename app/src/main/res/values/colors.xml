@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="brand">#FF1B6B4A</color>
+    <color name="brand_dark">#FF124D35</color>
+    <color name="brand_soft">#E9F3ED</color>
+    <color name="chip_bg">#66000000</color>
+    <color name="chip_bg_active">#FF1B6B4A</color>
+    <color name="watermark_bg">#B3000000</color>
+    <color name="watermark_text">#FFFFFFFF</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="text_primary">#172D23</color>
+    <color name="text_secondary">#65766C</color>
+    <color name="surface">#FFFFFFFF</color>
+    <color name="page_background">#F3F6F4</color>
+    <color name="divider">#DFE7E1</color>
+</resources>

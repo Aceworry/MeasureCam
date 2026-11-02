@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  快门按钮。
+  注意：不要用 shape="ring" —— ring 的 innerRadiusRatio / thicknessRatio 语义是"除数"
+  （默认 3 和 9），写成 0.86 / 0.14 会让内半径大于外半径，环厚归零，整颗按钮画不出来。
+  这里用 oval + stroke 表达圆环，solid 用半透明白，按下时提高透明度。
+-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape android:shape="oval">
+            <solid android:color="#66FFFFFF" />
+            <stroke android:width="4dp" android:color="@color/white" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#26FFFFFF" />
+            <stroke android:width="4dp" android:color="@color/white" />
+        </shape>
+    </item>
+</selector>

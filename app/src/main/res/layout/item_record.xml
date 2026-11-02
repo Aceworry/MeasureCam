@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+    android:layout_height="wrap_content" android:layout_marginBottom="10dp"
+    app:cardCornerRadius="18dp" app:cardElevation="0dp" app:strokeWidth="1dp"
+    app:strokeColor="@color/divider" app:cardBackgroundColor="@color/surface"
+    android:clickable="true" android:focusable="true">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:paddingStart="16dp" android:paddingEnd="12dp" android:paddingBottom="16dp">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical">
+            <TextView android:id="@+id/tv_category" android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:paddingTop="8dp" android:paddingBottom="8dp" android:textColor="@color/brand" android:textSize="13sp" android:textStyle="bold" />
+            <TextView android:id="@+id/btn_more" android:layout_width="48dp" android:layout_height="48dp"
+                android:gravity="center" android:text="@string/more_glyph" android:textSize="22sp"
+                android:textColor="@color/text_secondary" android:contentDescription="@string/record_actions"
+                android:background="?attr/selectableItemBackgroundBorderless" />
+        </LinearLayout>
+        <TextView android:id="@+id/tv_chainage" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:textSize="21sp" android:textStyle="bold" android:textColor="@color/text_primary" />
+        <TextView android:id="@+id/tv_time" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="4dp" android:textSize="12sp" android:textColor="@color/text_secondary" />
+        <TextView android:id="@+id/tv_values" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="12dp" android:background="@drawable/bg_soft_panel" android:padding="12dp" android:textSize="14sp" android:lineSpacingExtra="4dp"
+            android:textColor="@color/text_primary" />
+        <TextView android:id="@+id/tv_meta" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" android:textSize="12sp" android:lineSpacingExtra="3dp"
+            android:textColor="@color/text_secondary" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

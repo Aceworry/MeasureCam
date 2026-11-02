@@ -1,0 +1,3 @@
+-keep class com.measurecam.data.** { *; }
+-keepattributes Signature
+-keepattributes *Annotation*

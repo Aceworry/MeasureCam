@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/page_background" android:orientation="vertical">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:padding="18dp" android:layout_margin="16dp" android:background="@drawable/bg_panel">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical">
+            <TextView android:id="@+id/tv_count" android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:textSize="24sp" android:textStyle="bold" android:textColor="@color/text_primary" />
+            <TextView android:id="@+id/btn_clear" android:layout_width="48dp" android:layout_height="48dp"
+                android:gravity="center" android:text="@string/action_delete" android:textSize="13sp"
+                android:contentDescription="@string/delete_visible_records" android:textColor="@color/text_secondary"
+                android:background="?attr/selectableItemBackground" />
+        </LinearLayout>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="@string/record_list_hint" android:textSize="12sp" android:textColor="@color/text_secondary" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="14dp" style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            app:boxCornerRadiusTopStart="14dp" app:boxCornerRadiusTopEnd="14dp" app:boxCornerRadiusBottomStart="14dp" app:boxCornerRadiusBottomEnd="14dp"
+            app:boxBackgroundColor="@color/page_background"
+            android:hint="@string/record_search_hint" app:endIconMode="clear_text">
+            <com.google.android.material.textfield.TextInputEditText android:id="@+id/search_input"
+                android:layout_width="match_parent" android:layout_height="wrap_content" android:singleLine="true"
+                android:inputType="text" android:imeOptions="actionSearch" android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <HorizontalScrollView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:scrollbars="none" android:layout_marginTop="4dp">
+            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center_vertical">
+                <Button android:id="@+id/btn_category" style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content" android:minHeight="48dp"
+                    android:text="@string/filter_all_categories" android:textSize="13sp" />
+                <Button android:id="@+id/btn_period" style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content" android:minHeight="48dp"
+                    android:layout_marginStart="8dp" android:text="@string/filter_all_dates" android:textSize="13sp" />
+                <Button android:id="@+id/btn_reset" style="?attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content" android:minHeight="48dp"
+                    android:text="@string/filter_reset" android:textSize="13sp" android:visibility="gone" />
+            </LinearLayout>
+        </HorizontalScrollView>
+    </LinearLayout>
+    <ProgressBar android:id="@+id/loading" style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent" android:layout_height="3dp" android:indeterminate="true" android:visibility="gone" />
+    <FrameLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
+        <androidx.recyclerview.widget.RecyclerView android:id="@+id/recycler"
+            android:layout_width="match_parent" android:layout_height="match_parent"
+            android:clipToPadding="false" android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingBottom="16dp" />
+        <TextView android:id="@+id/tv_empty" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_gravity="center" android:gravity="center" android:padding="32dp"
+            android:drawableTop="@drawable/ic_empty_records" android:drawablePadding="20dp"
+            android:lineSpacingExtra="6dp" android:text="@string/record_empty"
+            android:textColor="@color/text_secondary" android:textSize="15sp" android:visibility="gone" />
+    </FrameLayout>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingTop="8dp" android:paddingBottom="12dp"
+        android:background="@color/surface" android:elevation="4dp">
+        <Button android:id="@+id/btn_import" style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+            android:minHeight="52dp" android:text="@string/record_import" android:contentDescription="@string/import_hint" />
+        <Button android:id="@+id/btn_export" android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="2" android:layout_marginStart="12dp" android:minHeight="52dp" android:text="@string/record_export" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:background="@color/page_background">
+    <ScrollView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:fillViewport="true" android:clipToPadding="false">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+            <LinearLayout style="@style/PanelSection">
+                <TextView style="@style/SectionTitle" android:text="@string/template_basics" />
+                <TextView android:id="@+id/label_name" android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:labelFor="@id/et_name" android:text="@string/label_template_name" android:textSize="12sp" android:textColor="@color/text_secondary" />
+                <EditText android:id="@+id/et_name" android:layout_width="match_parent" android:layout_height="52dp"
+                    android:importantForAutofill="no" android:inputType="text" android:singleLine="true" android:textSize="17sp" />
+                <TextView android:id="@+id/label_title" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp"
+                    android:labelFor="@id/et_title" android:text="@string/label_title_line" android:textSize="12sp" android:textColor="@color/text_secondary" />
+                <EditText android:id="@+id/et_title" android:layout_width="match_parent" android:layout_height="52dp"
+                    android:importantForAutofill="no" android:inputType="text" android:singleLine="true" android:textSize="16sp" />
+                <Button android:id="@+id/btn_style" style="?attr/materialButtonOutlinedStyle" android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp" android:minHeight="52dp" android:text="@string/watermark_weather_settings" />
+            </LinearLayout>
+            <LinearLayout style="@style/PanelSection">
+                <TextView style="@style/SectionTitle" android:text="@string/template_auto_info" />
+                <CheckBox android:id="@+id/cb_time" android:layout_width="match_parent" android:layout_height="48dp" android:text="@string/label_show_time" android:textSize="14sp" />
+                <CheckBox android:id="@+id/cb_address" android:layout_width="match_parent" android:layout_height="48dp" android:text="@string/label_show_address" android:textSize="14sp" />
+                <CheckBox android:id="@+id/cb_auto_chainage" android:layout_width="match_parent" android:layout_height="48dp" android:text="@string/label_auto_chainage" android:textSize="14sp" />
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical">
+                    <TextView android:id="@+id/label_step" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                        android:labelFor="@id/et_step" android:text="@string/label_chainage_step" android:textSize="12sp" android:textColor="@color/text_secondary" />
+                    <EditText android:id="@+id/et_step" android:layout_width="80dp" android:layout_height="48dp" android:layout_marginStart="8dp"
+                        android:inputType="numberDecimal" android:importantForAutofill="no" android:singleLine="true" android:textSize="15sp" />
+                </LinearLayout>
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical">
+                    <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:labelFor="@id/et_advance_limit"
+                        android:text="@string/label_advance_limit" android:textSize="13sp" android:textColor="@color/text_secondary" />
+                    <EditText android:id="@+id/et_advance_limit" android:layout_width="80dp" android:layout_height="48dp"
+                        android:inputType="number" android:importantForAutofill="no" android:singleLine="true" android:textSize="15sp" />
+                </LinearLayout>
+            </LinearLayout>
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="12dp" android:layout_marginBottom="16dp"
+                android:background="@drawable/bg_soft_panel" android:text="@string/drag_order_hint" android:textSize="12sp" android:lineSpacingExtra="3dp" android:textColor="@color/brand" />
+            <LinearLayout style="@style/PanelSection">
+                <TextView style="@style/SectionTitle" android:text="@string/label_sticky" />
+                <LinearLayout android:id="@+id/container_sticky" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" />
+                <TextView android:id="@+id/btn_add_sticky" android:layout_width="match_parent" android:layout_height="48dp" android:gravity="center_vertical"
+                    android:background="?attr/selectableItemBackground" android:text="@string/action_add" android:textColor="@color/brand" android:textSize="14sp" />
+            </LinearLayout>
+            <TextView style="@style/SectionTitle" android:text="@string/label_measure" />
+            <LinearLayout android:id="@+id/container_category" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" />
+            <TextView android:id="@+id/btn_add_category" android:layout_width="match_parent" android:layout_height="48dp" android:gravity="center"
+                android:background="@drawable/bg_soft_panel" android:text="@string/category_add" android:textColor="@color/brand" android:textSize="14sp" />
+        </LinearLayout>
+    </ScrollView>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingStart="16dp" android:paddingEnd="16dp"
+        android:paddingTop="8dp" android:paddingBottom="12dp" android:background="@color/surface" android:elevation="4dp">
+        <Button android:id="@+id/btn_save" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="52dp" android:text="@string/action_save_template" />
+    </LinearLayout>
+</LinearLayout>

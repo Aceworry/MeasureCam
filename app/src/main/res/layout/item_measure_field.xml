@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/field_row"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingTop="3dp"
+    android:paddingBottom="3dp">
+
+    <TextView
+        android:id="@+id/tv_label"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:textColor="@color/text_primary"
+        android:textSize="14sp" />
+
+    <!-- 多值字段（平整度每方向 2 个读数）在这里动态塞入多个输入框 -->
+    <LinearLayout
+        android:id="@+id/value_row"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" />
+
+    <TextView
+        android:id="@+id/tv_unit"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:textColor="@color/text_secondary"
+        android:textSize="13sp" />
+
+</LinearLayout>

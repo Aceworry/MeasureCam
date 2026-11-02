@@ -1,0 +1,16 @@
+*.iml
+.gradle/
+local.properties
+.idea/
+.DS_Store
+build/
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+
+# 本地验证据与素材（体积大，不入库）
+/验收截图/
+/review/
+/logo-candidates/

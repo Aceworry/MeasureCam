@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 顺序必须与 WatermarkAnchor 枚举一致：行优先，左上 → 右下 -->
+    <string-array name="anchor_names">
+        <item>左上</item>
+        <item>上中</item>
+        <item>右上</item>
+        <item>左中</item>
+        <item>居中</item>
+        <item>右中</item>
+        <item>左下</item>
+        <item>下中</item>
+        <item>右下</item>
+    </string-array>
+    <string-array name="record_periods"><item>全部日期</item><item>今天</item><item>近 7 天</item><item>近 30 天</item></string-array>
+</resources>

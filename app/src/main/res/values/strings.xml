@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">图数相机</string>
+    <string name="title_templates">模板</string>
+    <string name="title_template_edit">编辑模板</string>
+    <string name="title_records">记录</string>
+    <string name="title_record_edit">修改记录</string>
+
+    <string name="shutter">拍照</string>
+    <string name="quick_save">保存</string>
+    <string name="cancel">取消</string>
+    <string name="ok">确定</string>
+    <string name="action_gallery">相册</string>
+    <string name="action_new">新建</string>
+    <string name="action_delete">删除</string>
+    <string name="action_add">添加</string>
+
+    <string name="fill_title">录入测量数据</string>
+    <string name="fill_title_cat">录入 · %1$s</string>
+    <string name="fill_hint">回车跳下一格，最后一格回车直接保存</string>
+    <string name="reuse_last">沿用上次数值</string>
+    <string name="saved_toast">已保存到相册</string>
+    <string name="saving">保存中…</string>
+
+    <string name="no_field">当前模板没有数值字段，请先到模板管理里添加</string>
+
+    <string name="err_number">请输入数字</string>
+    <string name="no_last_values">还没有上次数值</string>
+    <string name="reused_count">已填入 %1$d 项</string>
+    <string name="reuse_nothing_empty">没有空格可填</string>
+
+    <string name="label_template_name">模板名称</string>
+    <string name="label_title_line">水印标题（可空）</string>
+    <string name="label_sticky">常驻信息（拍前可改）</string>
+    <string name="label_measure">数值分类（拍后按分类录入）</string>
+    <string name="label_show_time">显示拍摄时间</string>
+    <string name="label_show_address">显示定位地址</string>
+    <string name="label_auto_chainage">桩号按 GPS 位移自动递增</string>
+    <string name="label_chainage_step">无有效 GPS 时步长（m）</string>
+    <string name="field_label">标签</string>
+    <string name="field_unit">单位</string>
+    <string name="field_as_chainage">桩号</string>
+    <string name="type_decimal">小数</string>
+    <string name="type_integer">整数</string>
+    <string name="type_text">文本</string>
+
+    <string name="category_add">添加分类</string>
+    <string name="category_name_hint">分类名称（如 基平台）</string>
+    <string name="field_add">添加字段</string>
+
+    <string name="remove_glyph">✕</string>
+    <string name="action_save_template">保存模板</string>
+    <string name="confirm_delete_title">删除模板</string>
+    <string name="confirm_delete_msg">确定删除「%1$s」？</string>
+    <string name="keep_one_template">至少要保留一个模板</string>
+    <string name="template_saved">模板已保存</string>
+    <string name="summary_fmt">%1$d 项常驻 · %2$d 个分类 · %3$d 项数值</string>
+
+    <string name="perm_camera_title">需要相机权限</string>
+    <string name="perm_camera_msg">拍照记录需要相机权限。请到系统设置里允许「图数相机」使用相机，返回后会自动恢复取景。</string>
+    <string name="action_go_settings">去设置</string>
+    <string name="action_exit">退出</string>
+
+    <string name="chainage_note_gps">桩号已按 GPS 位移 +%1$.1f m 推算，可直接回车</string>
+    <string name="chainage_note_step">GPS 位移不可用，按步长 +%1$.0f m 推算</string>
+    <string name="chainage_note_same">位移 %1$.1f m 过小，沿用上次桩号</string>
+    <string name="chainage_first">首次录入，请手填桩号（如 K0+350），之后自动递增</string>
+
+    <string name="record_empty">还没有记录\n拍完照片，或点下方「导入」把相册里已有的照片加进来</string>
+    <string name="record_export">导出记录</string>
+    <string name="record_no_data">没有可导出的记录</string>
+    <string name="export_ok">已导出 %1$d 条记录\n%2$s</string>
+    <string name="export_fail">导出失败</string>
+    <string name="export_share">分享</string>
+    <string name="export_chooser">导出记录表</string>
+    <string name="photo_missing">照片已不在相册</string>
+    <string name="record_no_original">无可编辑原图</string>
+
+    <!-- 记录删除 -->
+    <string name="action_edit">编辑数值</string>
+    <string name="action_view_photo">查看照片</string>
+    <string name="delete_record_title">删除这条记录</string>
+    <string name="delete_record_only">只删记录（照片留在相册）</string>
+    <string name="delete_with_photo">记录和照片一起删</string>
+    <string name="deleted_count">已删除 %1$d 条</string>
+    <string name="clear_keep_photo">只清记录（照片留在相册）</string>
+    <string name="clear_with_photo">记录和照片一起清掉</string>
+
+    <!-- 记录编辑 -->
+    <string name="edit_preview_desc">成片预览</string>
+    <string name="edit_hint">拖动预览图中的水印可微调位置。保存后更新相册里的照片。</string>
+    <string name="edit_save">保存修改</string>
+    <string name="edit_add_field">＋ 添加一行数值</string>
+    <string name="edit_sticky_section">常驻信息</string>
+    <string name="edit_watermark_pos">水印位置</string>
+    <string name="edit_watermark_size">水印字号</string>
+    <string name="edit_no_category">未分类</string>
+    <string name="edit_no_fields">还没有数值，点下面加一行</string>
+    <string name="edit_no_sticky">没有常驻信息</string>
+    <string name="edit_value_index">值%1$d</string>
+    <string name="edit_field_label_hint">标签（如 深度）</string>
+    <string name="edit_field_value_hint">数值</string>
+    <string name="edit_field_unit_hint">单位（如 mm，可空）</string>
+    <string name="edit_field_label_required">标签不能为空</string>
+    <string name="edit_record_missing">记录不存在</string>
+    <string name="edit_saved">已更新，相册里那张已覆盖</string>
+    <string name="edit_write_failed">写入相册失败</string>
+    <string name="edit_no_original_hint">这张是旧版本拍的，没留无水印原图，改不了数值。删掉重拍更稳。</string>
+    <string name="edit_original_lost">原图已丢失，无法重绘水印</string>
+
+    <!-- 图片导入 -->
+    <string name="record_import">导入</string>
+    <string name="import_progress_title">正在导入图片</string>
+    <string name="import_progress">第 %1$d / %2$d 张</string>
+    <string name="import_done">已导入 %1$d 张，点条目可补填数值</string>
+    <string name="import_done_partial">已导入 %1$d 张，%2$d 张失败</string>
+    <string name="import_all_failed">导入失败，这些图可能已损坏</string>
+    <string name="import_no_template">当前模板没有可用分类，先去模板里配一个</string>
+    <string name="import_tag">导入</string>
+    <string name="import_hint">从相册导入已有照片，同一套模板加水印，之后可补填数值</string>
+    <string name="record_filtered_count">%1$d 条 / 共 %2$d 条</string>
+    <string name="record_search_hint">搜索桩号、项目、数值或文件名</string>
+    <string name="record_list_hint">按拍摄时间倒序 · 点记录编辑，点右侧菜单查看或删除</string>
+    <string name="filter_all_categories">全部分类</string>
+    <string name="filter_all_dates">全部日期</string>
+    <string name="filter_category">筛选分类</string>
+    <string name="filter_period">筛选拍摄日期</string>
+    <string name="filter_reset">重置</string>
+    <string name="record_no_match">没有符合条件的记录\n试试更换关键词，或重置筛选</string>
+    <string name="record_export_filtered">导出筛选结果</string>
+    <string name="delete_visible_records">删除当前筛选结果</string>
+    <string name="delete_filtered_title">删除当前显示的 %1$d 条记录？</string>
+    <string name="record_no_chainage">未填写桩号</string>
+    <string name="record_fill_values">待补填测量数值</string>
+    <string name="more_glyph">⋮</string>
+    <string name="record_actions">记录操作</string>
+    <string name="record_load_failed">读取记录失败，请返回后重试</string>
+    <string name="record_write_failed">记录写入失败，请检查剩余存储空间后重试</string>
+    <string name="delete_partial">已删 %1$d 条记录，%2$d 张相册照片未能删除</string>
+    <string name="edit_unsaved_title">修改还未保存</string>
+    <string name="edit_unsaved_message">离开会丢弃本次修改。</string>
+    <string name="edit_keep_editing">继续编辑</string>
+    <string name="edit_discard">放弃修改</string>
+    <string name="edit_record_write_failed">照片已更新，但记录写入失败。请保留本页并重试保存。</string>
+    <string name="capture_record_write_failed">照片已存入相册，但记录写入失败，请检查剩余存储空间。</string>
+    <string name="camera_start_failed">相机初始化失败，请返回应用重试</string>
+    <string name="edit_saving_wait">正在保存，请稍候</string>
+    <string name="watermark_settings">设置</string>
+    <string name="watermark_weather_settings">水印样式与天气设置</string>
+    <string name="drag_order_hint">长按 ☰ 拖动排序；点击 ☰ 可逐项移动。格式可分别设置标签和数值。</string>
+    <string name="field_format">格式</string>
+    <string name="photo_watermark_style">水印样式</string>
+    <string name="template_library_hint">为不同工序保存字段、样式与排序
+点选卡片即可编辑模板</string>
+    <string name="template_actions">模板操作</string>
+    <string name="template_in_use">当前使用</string>
+    <string name="template_edit_link">编辑模板  ›</string>
+    <string name="template_basics">基本信息</string>
+    <string name="template_auto_info">自动信息</string>
+    <string name="template_count">%1$d 套模板</string>
+    <string name="label_advance_limit">单次推进上限（米）</string>
+</resources>

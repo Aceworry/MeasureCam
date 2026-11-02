@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp" app:cardCornerRadius="18dp" app:cardElevation="0dp" app:strokeWidth="1dp"
+    app:strokeColor="@color/divider" app:cardBackgroundColor="@color/surface" android:clickable="true" android:focusable="true">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="18dp">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical">
+            <TextView android:id="@+id/tv_name" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                android:textColor="@color/text_primary" android:textSize="19sp" android:textStyle="bold" />
+            <TextView android:id="@+id/btn_more" android:layout_width="48dp" android:layout_height="48dp" android:gravity="center"
+                android:text="@string/more_glyph" android:textSize="22sp" android:textColor="@color/text_secondary"
+                android:contentDescription="@string/template_actions" android:background="?attr/selectableItemBackgroundBorderless" />
+        </LinearLayout>
+        <TextView android:id="@+id/tv_summary" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:textColor="@color/text_secondary" android:textSize="13sp" android:lineSpacingExtra="3dp" />
+        <View android:layout_width="match_parent" android:layout_height="1dp" android:layout_marginTop="16dp" android:layout_marginBottom="12dp" android:background="@color/divider" />
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical">
+            <TextView android:id="@+id/tv_current" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:background="@drawable/bg_soft_panel" android:paddingStart="10dp" android:paddingEnd="10dp" android:paddingTop="5dp" android:paddingBottom="5dp"
+                android:text="@string/template_in_use" android:textColor="@color/brand" android:textSize="11sp" />
+            <Space android:layout_width="0dp" android:layout_height="1dp" android:layout_weight="1" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/template_edit_link"
+                android:textSize="13sp" android:textStyle="bold" android:textColor="@color/brand" />
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
