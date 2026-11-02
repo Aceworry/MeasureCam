@@ -14,7 +14,7 @@ import android.os.Looper
 import com.measurecam.widget.StyleDialogs
 import com.measurecam.data.WatermarkStyle
 import com.measurecam.util.WeatherService
-import android.provider.MediaStore
+import com.measurecam.storage.GalleryNavigation
 import android.provider.Settings
 import android.view.Gravity
 import android.view.MotionEvent
@@ -129,6 +129,10 @@ class MainActivity : AppCompatActivity() {
 
     private val prefs by lazy {
         getSharedPreferences("measurecam", Context.MODE_PRIVATE)
+    }
+
+    private val galleryPicker = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        GalleryNavigation.onSelection(this, it)
     }
 
     private val permissionLauncher = registerForActivityResult(
@@ -642,9 +646,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openGallery() {
-        val intent = Intent(Intent.ACTION_VIEW, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        runCatching { startActivity(intent) }
-            .onFailure { toast("没有可用的相册应用") }
+        GalleryNavigation.open(this) { galleryPicker.launch(it) }
     }
 
     // ---------------- 桩号推算 ----------------

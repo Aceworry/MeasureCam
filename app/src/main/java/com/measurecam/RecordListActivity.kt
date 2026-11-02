@@ -26,6 +26,7 @@ import com.measurecam.databinding.ItemRecordBinding
 import com.measurecam.storage.CsvExporter
 import com.measurecam.storage.OriginalStore
 import com.measurecam.storage.PhotoImporter
+import com.measurecam.storage.GalleryNavigation
 import com.measurecam.storage.PhotoSaver
 import com.measurecam.render.WatermarkRenderer
 import java.util.concurrent.Executors
@@ -342,12 +343,7 @@ class RecordListActivity : AppCompatActivity() {
             toast(getString(R.string.photo_missing))
             return
         }
-        runCatching {
-            startActivity(Intent(Intent.ACTION_VIEW).apply {
-                setDataAndType(uri, "image/jpeg")
-                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            })
-        }.onFailure { toast(getString(R.string.photo_missing)) }
+        GalleryNavigation.viewRecordPhoto(this, uri)
     }
 
     // ---------------- 导出 ----------------

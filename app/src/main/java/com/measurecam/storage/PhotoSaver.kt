@@ -29,6 +29,7 @@ object PhotoSaver {
         }
     }.getOrDefault(false)
 
+    @androidx.annotation.RequiresApi(Build.VERSION_CODES.Q)
     private fun saveScoped(context: Context, jpeg: File, displayName: String): Boolean {
         val resolver = context.contentResolver
         val values = ContentValues().apply {
@@ -38,24 +39,20 @@ object PhotoSaver {
             put(MediaStore.Images.Media.IS_PENDING, 1)
         }
 
-        val uri: Uri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
-            ?: return false
-
-        val ok = runCatching {
-            resolver.openOutputStream(uri)?.use { out ->
-                jpeg.inputStream().use { it.copyTo(out) }
-            } != null
-        }.getOrDefault(false)
-
-        if (!ok) {
-            runCatching { resolver.delete(uri, null, null) }
-            return false
+        val collection = MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
+        val uri = resolver.insert(collection, values) ?: return false
+        var published = false
+        try {
+            val out = resolver.openOutputStream(uri) ?: return false
+            val bytes = out.use { stream -> jpeg.inputStream().use { it.copyTo(stream) } }
+            if (bytes == 0L) return false
+            values.clear()
+            values.put(MediaStore.Images.Media.IS_PENDING, 0)
+            published = resolver.update(uri, values, null, null) > 0
+            return published
+        } finally {
+            if (!published) runCatching { resolver.delete(uri, null, null) }
         }
-
-        values.clear()
-        values.put(MediaStore.Images.Media.IS_PENDING, 0)
-        resolver.update(uri, values, null, null)
-        return true
     }
 
     private fun saveLegacy(context: Context, jpeg: File, displayName: String): Boolean {
@@ -88,10 +85,13 @@ object PhotoSaver {
                 @Suppress("DEPRECATION")
                 File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "$ALBUM/$displayName").absolutePath
             }
-        val selection = "${MediaStore.Images.Media.DISPLAY_NAME} = ? AND $pathColumn = ?"
+        val scoped = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
+        val pathMatch = if (scoped) "$pathColumn IN (?, ?)" else "$pathColumn = ?"
+        val args = if (scoped) arrayOf(displayName, pathValue, pathValue.trimEnd('/')) else arrayOf(displayName, pathValue)
+        val selection = "${MediaStore.Images.Media.DISPLAY_NAME} = ? AND $pathMatch"
         context.contentResolver.query(
             MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-            projection, selection, arrayOf(displayName, pathValue), null
+            projection, selection, args, null
         )?.use { c ->
             if (c.moveToFirst()) {
                 ContentUris.withAppendedId(

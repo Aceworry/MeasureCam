@@ -3,6 +3,10 @@ package com.measurecam
 import android.app.Activity
 import android.app.Instrumentation
 import android.content.ContextWrapper
+import android.content.ActivityNotFoundException
+import android.content.ClipData
+import androidx.activity.result.ActivityResult as PickerResult
+import com.measurecam.storage.GalleryNavigation
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import androidx.camera.core.ImageCapture
@@ -92,6 +96,10 @@ class WorkflowInstrumentation : Instrumentation() {
             test("capture entry warns and enforces chainage limit") { entryValidationChecks() }
             test("camera drag updates template and imported photo") { cameraDragChecks() }
             closeActivity()
+            test("camera gallery opens a declared album and returns to camera") { galleryHomeChecks() }
+            test("gallery fallback handles missing or blocked handlers") { galleryFallbackChecks() }
+            test("picked image previews without import and cancel stays in camera") { galleryPreviewChecks() }
+            test("album publishes readable photos and removes incomplete writes") { publishedPhotoChecks() }
             test("photo import preserves type and creates editable record") { importChecks() }
             test("camera controls stay fixed and JPEG follows capture orientation") { rotationChecks() }
             test("zoom badge fully visible inside control") { zoomBoundsChecks() }
@@ -122,6 +130,95 @@ class WorkflowInstrumentation : Instrumentation() {
         try { body(); resultLines.add("PASS: $name") }
         catch (e: Throwable) { failures.add("FAIL: $name\n${e.stackTraceToString()}") }
         sendStatus(0, Bundle().apply { putString("stream", "END: $name\n") })
+    }
+
+    private fun galleryHomeChecks() {
+        val a = cameraActivity!!
+        val declared = a.packageManager.queryIntentActivities(Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_APP_GALLERY), 0)
+            .filter { it.activityInfo.exported && it.activityInfo.enabled }.map { it.activityInfo.packageName }
+        runOnMainSync { a.findViewById<View>(R.id.btn_gallery).performClick() }
+        await {
+            val foreground = uiAutomation.rootInActiveWindow?.packageName?.toString()
+            foreground != null && foreground != a.packageName && (declared.isEmpty() || foreground in declared || foreground == "android")
+        }
+        check(uiAutomation.performGlobalAction(android.accessibilityservice.AccessibilityService.GLOBAL_ACTION_BACK))
+        await { a.hasWindowFocus() }
+    }
+
+    private fun galleryFallbackChecks() {
+        val a = cameraActivity!!
+        val started = mutableListOf<Intent>()
+        val unavailable = object : ContextWrapper(a) {
+            override fun startActivity(intent: Intent) {
+                started += intent
+                if (intent.component?.className == RecordListActivity::class.java.name) return
+                if (intent.component != null) throw SecurityException("inaccessible gallery component")
+                throw ActivityNotFoundException("no default gallery")
+            }
+        }
+        val picks = mutableListOf<Intent>()
+        runOnMainSync { GalleryNavigation.open(unavailable) { picks += it } }
+        check(started.first().selector?.hasCategory(Intent.CATEGORY_APP_GALLERY) == true)
+        check(started.all { it.data == null && it.action == Intent.ACTION_MAIN })
+        check(picks.single().type == "image/*")
+
+        picks.clear()
+        runOnMainSync { GalleryNavigation.open(unavailable) { option ->
+            picks += option
+            if (option.action != Intent.ACTION_OPEN_DOCUMENT) throw SecurityException("disabled picker")
+        } }
+        check(picks.last().action == Intent.ACTION_OPEN_DOCUMENT && picks.last().type == "image/*")
+
+        runOnMainSync { GalleryNavigation.open(unavailable) { throw ActivityNotFoundException("no picker") } }
+        check(started.last().component?.className == RecordListActivity::class.java.name)
+    }
+
+    private fun galleryPreviewChecks() {
+        val a = cameraActivity!!
+        val photo = PhotoSaver.findUri(targetContext, sample.photoName)!!
+        val selection = Intent().apply { clipData = ClipData.newRawUri("photo", photo) }
+        runOnMainSync { GalleryNavigation.onSelection(a, PickerResult(Activity.RESULT_CANCELED, selection)) }
+        check(a.hasWindowFocus())
+        val before = RecordRepository.load(targetContext).size
+        runOnMainSync { GalleryNavigation.onSelection(a, PickerResult(Activity.RESULT_OK, selection)) }
+        await { resumed is PhotoPreviewActivity && resumed?.findViewById<ImageView>(R.id.photo)?.drawable is BitmapDrawable }
+        val preview = resumed!!
+        check(preview.intent.data == photo && RecordRepository.load(targetContext).size == before)
+        runOnMainSync { preview.finish() }
+        await { a.hasWindowFocus() }
+        // 在没有外部看图程序的设备，记录里的“查看照片”仍打开同一张成片。
+        val noViewer = object : ContextWrapper(a) {
+            override fun startActivity(intent: Intent) {
+                if (intent.action == Intent.ACTION_VIEW) {
+                    check(intent.data == photo && intent.flags and Intent.FLAG_GRANT_READ_URI_PERMISSION != 0)
+                    throw ActivityNotFoundException()
+                }
+                super.startActivity(intent)
+            }
+        }
+        runOnMainSync { GalleryNavigation.viewRecordPhoto(noViewer, photo) }
+        await { resumed is PhotoPreviewActivity && resumed?.findViewById<ImageView>(R.id.photo)?.drawable is BitmapDrawable }
+        runOnMainSync { resumed!!.finish() }
+        await { a.hasWindowFocus() }
+    }
+
+    private fun publishedPhotoChecks() {
+        if (android.os.Build.VERSION.SDK_INT < 29) return
+        val uri = PhotoSaver.findUri(targetContext, sample.photoName)!!
+        targetContext.contentResolver.query(uri, arrayOf("is_pending", "relative_path"), null, null, null)!!.use {
+            check(it.moveToFirst() && it.getInt(0) == 0)
+            check(it.getString(1).trimEnd('/') == "Pictures/图数相机")
+        }
+        val name = marker + "_empty.jpg"
+        val empty = File(targetContext.cacheDir, name)
+        try {
+            empty.createNewFile()
+            check(!PhotoSaver.save(targetContext, empty, name))
+            check(PhotoSaver.findUri(targetContext, name) == null)
+        } finally {
+            empty.delete()
+            PhotoSaver.deleteByName(targetContext, name)
+        }
     }
 
     private fun zipExportChecks() {

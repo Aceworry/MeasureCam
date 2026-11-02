@@ -159,4 +159,7 @@
     <string name="template_auto_info">自动信息</string>
     <string name="template_count">%1$d 套模板</string>
     <string name="label_advance_limit">单次推进上限（米）</string>
+    <string name="gallery_preview_title">查看照片</string>
+    <string name="gallery_image_unavailable">无法读取这张照片，请返回后重新选择。</string>
+    <string name="gallery_records_fallback">当前系统无法打开图库或照片选择器，已打开拍摄记录。</string>
 </resources>

@@ -13,6 +13,13 @@
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
 
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.APP_GALLERY" />
+        </intent>
+    </queries>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -64,6 +71,9 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.MeasureCam.Sub"
             android:windowSoftInputMode="adjustResize" />
+
+        <activity android:name=".PhotoPreviewActivity" android:exported="false"
+            android:label="@string/gallery_preview_title" android:theme="@style/Theme.MeasureCam.Sub" />
 
         <!-- 导出 CSV 后要能分享出去，必须用 FileProvider 给 content:// -->
         <provider
